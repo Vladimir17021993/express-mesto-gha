@@ -47,6 +47,11 @@ exports.createCard = (req, res) => {
           }
         });
         res.status(400).send({ message: errorMessage });
+        return;
+      }
+      if (err.name === 'CastError') {
+        const errorMessage = 'Переданы неверные данные';
+        res.status(400).send({ message: errorMessage });
       } else {
         res.status(500).send({ message: err.message });
       }

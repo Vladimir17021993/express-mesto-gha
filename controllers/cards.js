@@ -22,10 +22,12 @@ exports.deleteCardById = (req, res) => {
     .orFail(() => {
       throw new ErrorNotFound(`Карточка с ID ${req.params.cardId} не найдена.`);
     })
-    .then((card) => res.send(card))
+    .then((card) => res.send({ message: `Карточка с id ${card._id} удалена` }))
     .catch((err) => {
       if (err.statusCode === 404) {
         res.status(404).send({ message: err.errorMessage });
+      } else {
+        res.status(500).send({ message: err.message });
       }
     });
 };

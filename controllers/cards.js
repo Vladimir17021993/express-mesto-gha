@@ -3,7 +3,7 @@ const ErrorBadRequest = require('../utils/ErrorBadRequest');
 const ErrorNotFound = require('../utils/ErrorNotFound');
 
 exports.getCards = (req, res) => {
-  Card.find({})
+  Card.find({}, { new: true })
     .orFail(() => {
       throw new ErrorBadRequest('Карточки не найдены.');
     })
@@ -40,7 +40,7 @@ exports.deleteCardById = (req, res) => {
 exports.createCard = (req, res) => {
   const ownerId = req.user._id;
   const { name, link } = req.body;
-  Card.create({ name, link, owner: ownerId })
+  Card.create({ name, link, owner: ownerId }, { new: true })
     .then((card) => res.send(card))
     .catch((err) => {
       if (err.name === 'ValidationError') {

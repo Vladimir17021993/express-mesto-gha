@@ -26,6 +26,11 @@ exports.deleteCardById = (req, res) => {
     .catch((err) => {
       if (err.statusCode === 404) {
         res.status(404).send({ message: err.errorMessage });
+        return;
+      }
+      if (err.name === 'CastError') {
+        const errorMessage = 'Переданы неверные данные';
+        res.status(400).send({ message: errorMessage });
       } else {
         res.status(500).send({ message: err.message });
       }

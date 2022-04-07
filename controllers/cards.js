@@ -18,7 +18,7 @@ exports.getCards = (req, res) => {
 };
 
 exports.deleteCardById = (req, res) => {
-  Card.findByIdAndRemove(req.params.cardId)
+  Card.findByIdAndRemove(req.params.cardId, { new: true })
     .orFail(() => {
       throw new ErrorNotFound(`Карточка с ID ${req.params.cardId} не найдена.`);
     })

@@ -40,7 +40,7 @@ exports.deleteCardById = (req, res) => {
 exports.createCard = (req, res) => {
   const ownerId = req.user._id;
   const { name, link } = req.body;
-  Card.create({ name, link, owner: ownerId }, { new: true })
+  Card.create({ name, link, owner: ownerId })
     .then((card) => res.send(card))
     .catch((err) => {
       if (err.name === 'ValidationError') {

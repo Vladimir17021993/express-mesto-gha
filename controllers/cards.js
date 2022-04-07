@@ -3,7 +3,7 @@ const ErrorBadRequest = require('../utils/ErrorBadRequest');
 const ErrorNotFound = require('../utils/ErrorNotFound');
 
 exports.getCards = (req, res) => {
-  Card.find({}, { new: true })
+  Card.find({})
     .orFail(() => {
       throw new ErrorBadRequest('Карточки не найдены.');
     })

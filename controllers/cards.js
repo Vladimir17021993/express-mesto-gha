@@ -72,7 +72,7 @@ exports.likeCard = (req, res) => {
     .orFail(() => {
       throw new ErrorNotFound(`Карточка с ID ${req.params.cardId} не найдена.`);
     })
-    .then((like) => res.send(like))
+    .then((card) => res.send(card))
     .catch((err) => {
       if (err.name === 'NotFound') {
         res.status(404).send({ message: err.errorMessage });
@@ -96,7 +96,7 @@ exports.dislikeCard = (req, res) => {
     .orFail(() => {
       throw new ErrorNotFound(`Карточка с ID ${req.params.cardId} не найдена.`);
     })
-    .then((like) => res.send(like))
+    .then((card) => res.send(card))
     .catch((err) => {
       if (err.name === 'NotFound') {
         res.status(404).send({ message: err.errorMessage });
